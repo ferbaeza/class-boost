@@ -1,0 +1,40 @@
+{
+    "name": "baezeta/template",
+    "description": "Composer Template for new Projects",
+    "autoload": {
+        "files": [
+                "src/functions/functions.php"
+        ],
+        "psr-4": {
+            "Baezeta\\Template\\": "src/",
+            "Baezeta\\Test\\": "test/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "symfony/var-dumper": "^6.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5",
+        "phpstan/phpstan": "^1.10",
+        "friendsofphp/php-cs-fixer": "^3.41"
+    },
+    "scripts": {
+        "auto": "composer dump-autoload -o",
+        "tests": "phpunit --color=always --testdox tests/",
+        "stan": "vendor/bin/phpstan analyse src --level 5",
+        "fixer": "php ./vendor/bin/php-cs-fixer fix src/ --diff",
+        "fixer-test": "php ./vendor/bin/php-cs-fixer fix tests/ --diff",
+        "post-package-install": [
+            "./vendor/bin/phpunit --generate-configuration"
+        ]
+    },
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Fer Baeza",
+            "email": "fbaezahurtado@gmail.com"
+        }
+    ]
+}
