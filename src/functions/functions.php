@@ -1,7 +1,8 @@
 <?php
 
 if(!function_exists('hello')) {
-    function hello(string $name) {
+    function hello(string $name)
+    {
         return "Hello, $name!";
     }
 }
