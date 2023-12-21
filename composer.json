@@ -1,12 +1,12 @@
 {
-    "name": "baezeta/catcher",
-    "description": "Library to get the errors after a cath",
+    "name": "baezeta/template",
+    "description": "Composer Template for new Projects",
     "autoload": {
         "files": [
                 "src/functions/functions.php"
         ],
         "psr-4": {
-            "Baezeta\\Catcher\\": "src/",
+            "Baezeta\\Template\\": "src/",
             "Baezeta\\Test\\": "test/"
         }
     },
