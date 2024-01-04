@@ -3,7 +3,7 @@
 namespace Src\Boost;
 
 use Src\Boost\Utils\BoostUtil;
-use Src\Exceptions\HydrateException;
+use Src\Exceptions\BodyExceptions\HydrateException;
 
 class Boost
 {
@@ -12,8 +12,8 @@ class Boost
         if(!is_object($class) && !class_exists($class)){
             throw HydrateException::create($class);
         }
-
         $dataFromConstructor = BoostUtil::create($class, $data);
+
         return new $class(...$dataFromConstructor);
     }
 }

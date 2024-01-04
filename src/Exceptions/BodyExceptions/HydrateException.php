@@ -1,11 +1,10 @@
 <?php
 
-namespace Src\Exceptions;
+namespace Src\Exceptions\BodyExceptions;
 
-use Exception;
+use Src\Exceptions\Base\MainException;
 
-
-class HydrateException extends Exception
+class HydrateException extends MainException
 {
     private const CLASS_NOT_EXISTS = "
     \n\033[31m----------HydrateException-------\033[0m\n    
@@ -13,11 +12,8 @@ class HydrateException extends Exception
     Verifique el namespace o el nombre del fichero
     \n\033[31m----------HydrateException-------\033[0m \n\n";
 
-    public static function create(string $class)
-    {
-        return new self(
-            sprintf(self::CLASS_NOT_EXISTS, $class)
-        );
-    }
+    protected static array $messages = [
+        self::class => self::CLASS_NOT_EXISTS
+    ];
 
 }

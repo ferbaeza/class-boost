@@ -1,7 +1,6 @@
 <?php
 
-namespace Src\Test\Clases;
-
+namespace Src\Test\Entidades;
 class Old
 {
     public function __construct(

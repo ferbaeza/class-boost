@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Test\Clases;
+namespace Src\Test\Entidades;
 
 class Uno
 {

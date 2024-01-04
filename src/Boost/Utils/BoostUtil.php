@@ -4,17 +4,16 @@ namespace Src\Boost\Utils;
 
 use ReflectionClass;
 use Src\Boost\Entity\Entidad;
-use Src\Exceptions\DataEmptyException;
-use Src\Exceptions\EntityConstructorException;
+use Src\Exceptions\BodyExceptions\DataEmptyException;
+use Src\Exceptions\BodyExceptions\EntityConstructorException;
 
 class BoostUtil
 {
     private const DATA_EMPTY = "is empty";
-    private static array $cache = [];
     private static array $constructor = [];
 
 
-    public static function create(object|string $class, array $data)
+    public static function create(object|string $class, array|string $data)
     {
         $data = self::verify($data);
         $constructor = self::verificarConstructor($class);
@@ -67,7 +66,14 @@ class BoostUtil
             return BoostDataUtil::arrayData($data);
         }
         if (is_string($data)) {
-            BoostDataUtil::jsonVerify($data);
+            $isJson = BoostDataUtil::jsonVerify($data);
+            if ($isJson) {
+                $data = json_decode($data, true);
+                if (empty($data)) {
+                    throw DataEmptyException::create(self::DATA_EMPTY);
+                }
+                return BoostDataUtil::arrayData($data);
+            }
         }
     }
 }

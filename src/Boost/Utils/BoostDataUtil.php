@@ -33,6 +33,9 @@ class BoostDataUtil
 
     public static function jsonVerify(string $data)
     {
-        dd($data);
+        if (is_string($data) && (isset($data[0]) && $data[0] === '{')) {
+            return true;
+        }
+        return false;
     }
 }

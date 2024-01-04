@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Exceptions;
+namespace Src\Exceptions\StaticExceptions;
 
 class ClaseException extends BoostException
 {
