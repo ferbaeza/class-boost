@@ -65,6 +65,26 @@ class BoostHydrateSimpleClassTest extends TestCase
     }
 
     /** @test*/
+    public function intentar_hidratar_una_clase_n_numero_de_veces()
+    {
+        $data = [
+            "nombre" => "fer",
+            "apellido" => "baeza",
+            "email" => "email@mail.com",
+            "direccion" => "Villena",
+            "nickname" => "baezeta",
+        ];
+        $start = microtime(true);
+        for ($i = 0; $i < 10000; $i++) {
+            $spectedEntity = hydrate(Old::class, $data);
+            $this->assertInstanceOf(Old::class, $spectedEntity);
+        }
+        $end = microtime(true);
+        $time = $end - $start;
+        dd($time);
+    }
+
+    /** @test*/
     public function error_al_intentar_hidratar_una_clase_con_un_array_vacio()
     {
         $this->expectException(DataEmptyException::class);
