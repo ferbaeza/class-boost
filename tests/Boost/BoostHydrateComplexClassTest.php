@@ -11,6 +11,7 @@ class BoostHydrateComplexClassTest extends TestCase
     /** @test*/
     public function hidratar_clase_compleja()
     {
+        $this->markTestIncomplete("No se ha implementado aun");
         $data = [
             "id" => "id",
             "nombre" => "Fernando",

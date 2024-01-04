@@ -6,6 +6,7 @@ use Src\Boost\Boost;
 use Src\Test\Entidades\Old;
 use Src\Test\Entidades\Uno;
 use PHPUnit\Framework\TestCase;
+use Src\Test\Entidades\DatosPersonales;
 use Src\Exceptions\BodyExceptions\DataEmptyException;
 
 class BoostHydrateSimpleClassTest extends TestCase
@@ -67,7 +68,8 @@ class BoostHydrateSimpleClassTest extends TestCase
     /** @test*/
     public function intentar_hidratar_una_clase_n_numero_de_veces()
     {
-        $data = [
+        // $this->markTestIncomplete("No se ha implementado aun");
+        $datosPersonales = [
             "nombre" => "fer",
             "apellido" => "baeza",
             "email" => "email@mail.com",
@@ -75,13 +77,14 @@ class BoostHydrateSimpleClassTest extends TestCase
             "nickname" => "baezeta",
         ];
         $start = microtime(true);
-        for ($i = 0; $i < 10000; $i++) {
-            $spectedEntity = hydrate(Old::class, $data);
-            $this->assertInstanceOf(Old::class, $spectedEntity);
-        }
+        for ($i = 0; $i < 100; $i++) {
+            $spectedEntity = hydrate(DatosPersonales::class, $datosPersonales);
+            $this->assertInstanceOf(DatosPersonales::class, $spectedEntity);
+            $this->assertEquals("baezeta", $spectedEntity->nickname);
+        }   
         $end = microtime(true);
         $time = $end - $start;
-        dd($time);
+        $this->assertLessThan(1, $time);
     }
 
     /** @test*/

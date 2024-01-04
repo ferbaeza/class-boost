@@ -17,6 +17,7 @@ class BoostUtil
     {
         $data = self::verify($data);
         $constructor = self::verificarConstructor($class);
+        self::$constructor = [];
 
         $dataObject =[];
         foreach($constructor as $value){

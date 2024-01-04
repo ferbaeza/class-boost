@@ -13,7 +13,6 @@ class Boost
             throw HydrateException::create($class);
         }
         $dataFromConstructor = BoostUtil::create($class, $data);
-
         return new $class(...$dataFromConstructor);
     }
 }
