@@ -1,13 +1,13 @@
 {
-    "name": "baezeta/template",
-    "description": "Composer Template for new Projects",
+    "name": "baezeta/class-boost",
+    "description": "Project to boost PHP classes from arrays",
     "autoload": {
         "files": [
                 "src/functions/functions.php"
         ],
         "psr-4": {
-            "Baezeta\\Template\\": "src/",
-            "Baezeta\\Test\\": "test/"
+            "Src\\": "src/",
+            "Test\\": "test/"
         }
     },
     "require": {
