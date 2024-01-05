@@ -2,7 +2,7 @@
 
 namespace Src\Test\Entidades;
 
-class DatosProfersionales
+class DatosProfesionales
 {
     public function __construct(
         public string $profesion,
@@ -10,7 +10,6 @@ class DatosProfersionales
         public string $empresa,
         public string $direccion,
         public string $telefono,
-    )
-    {
+    ) {
     }
 }

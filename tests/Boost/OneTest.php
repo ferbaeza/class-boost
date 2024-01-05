@@ -20,4 +20,12 @@ class OneTest extends TestCase
         $uno = new Old("nombre", "apellido", "email", "direccion", "nickname");
         $this->assertEquals("nombre", $uno->nombre);
     }
+
+    /** @test*/
+    public function comprobar_variable()
+    {
+        $test = "test";
+        $defined = get_defined_vars();
+        $this->assertArrayHasKey("test", $defined);
+    }
 }

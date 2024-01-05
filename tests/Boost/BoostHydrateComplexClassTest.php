@@ -2,7 +2,6 @@
 
 namespace Tests\Boost;
 
-use Src\Test\Entidades\Uno;
 use PHPUnit\Framework\TestCase;
 use Src\Test\Entidades\Persona;
 
@@ -11,7 +10,7 @@ class BoostHydrateComplexClassTest extends TestCase
     /** @test*/
     public function hidratar_clase_compleja()
     {
-        $this->markTestIncomplete("No se ha implementado aun");
+        // $this->markTestIncomplete("No se ha implementado aun");
         $data = [
             "id" => "id",
             "nombre" => "Fernando",

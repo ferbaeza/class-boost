@@ -8,7 +8,7 @@ class Persona
         public string $id,
         public string $nombre,
         public DatosPersonales $datosPersonales,
-        public DatosProfersionales $datosProfesionales,
+        public DatosProfesionales $datosProfesionales,
     )
         {
     }

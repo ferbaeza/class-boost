@@ -16,42 +16,47 @@ class BoostUtil
     public static function create(object|string $class, array|string $data)
     {
         $data = self::verify($data);
-        $constructor = self::verificarConstructor($class);
-        self::$constructor = [];
-
-        $dataObject =[];
-        foreach($constructor as $value){
-            $dataObject[$value] = $data[$value];
-        }
-        return $dataObject;
+        $constructor = self::verificarConstructor($class, $data);
+        dd(self::$constructor, $constructor, 20);
+        // return $entidad;
     }
 
-    protected static function verificarConstructor(object|string $class)
-    {
-        self::getConstructorParameters($class);
-        $errorConstructor = self::verificarAtributosConstructor();
-        if($errorConstructor){
-            throw EntityConstructorException::create($errorConstructor);
-        }
-        return self::$constructor;
-    }
-    
-    protected static function getConstructorParameters(object|string $class)
+    protected static function verificarConstructor(object|string $class, array|string $data)
     {
         $reflection = new ReflectionClass($class);
         $constructor = $reflection->getConstructor();
+        $errorConstructor = self::verificarAtributosConstructor($constructor);
+
+        if($errorConstructor){
+            throw EntityConstructorException::create($errorConstructor);
+        }
+        self::getConstructorParameters($constructor, $data);
+    }
+    
+    protected static function getConstructorParameters(object $constructor, array|string $data)
+    {
         foreach ($constructor->getParameters() as $parameter) {
-            self::$constructor[] = $parameter->getName();
+            $className = end(explode('\\',$constructor->class));
+            // dd($parameter->getName(), $parameter->getType(), end(explode('\\',$constructor->class)));
+            $type = $parameter->getType();
+            if ($type->isBuiltin()) {
+                self::$constructor[$className][$parameter->getName()] = $data[$parameter->getName()];
+            }
+            if(!$type->isBuiltin()){
+                if(class_exists(ucfirst($type->getName()))){
+                    self::create($type->getName(), $data[$parameter->getName()]);
+                }
+            }
         }
     }
-
-
-    protected static function verificarAtributosConstructor()
+        
+        
+    protected static function verificarAtributosConstructor(object $constructor)
     {
         $errors = null;
-        foreach (self::$constructor as $value) {
-            if(str_contains($value, '_')){
-                $errors .= "{$value} ";
+        foreach ($constructor->getParameters() as $parameter) {
+            if(str_contains($parameter->getName(), '_')){
+                $errors .= "{$parameter->getName()} ";
             }
         }
         return $errors;
